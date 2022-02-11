@@ -1,5 +1,10 @@
 def parse_binary(num):
   """Parses string binary code and returns string assembly"""
+
+  # strip spaces
+  num = num.replace(" ", "")
+
+  # define instruction part intervals
   op = num[0:2]
   rd = f"%r{int(num[2:7],2)}"
   op3 = num[7:13]
@@ -8,6 +13,7 @@ def parse_binary(num):
   imm = num[18]
   simm13 = int(num[19:], 2)
 
+  # format register output based on immediate
   imm_0 = f" {rs1}, {rs2}, {rd}"
   imm_1 = f" {rs1}, {simm13}, {rd}"
 
@@ -27,16 +33,10 @@ def parse_binary(num):
   elif op == '10':
     # addcc
     if op3 == '010000':
-      if imm == '0':
-        return "addcc" + imm_0
-      elif imm == '1':
-        return "addcc" + imm_1
-    # subcc
+      return "addcc" + imm_0 if imm == '0' else "addcc" + imm_1
+  # subcc
     if op3 == '010100':
-      if imm == '0':
-        return "subcc" + imm_0
-      elif imm == '1':
-        return "subcc" + imm_1
+      return "subcc" + imm_0 if imm == '0' else "subcc" + imm_1
     #andcc
     if op3 == '010001':
       return "andcc" + imm_0
@@ -48,10 +48,7 @@ def parse_binary(num):
       return "orncc" + imm_0
     # srl
     if op3 == '100110':
-      if imm == '0':
-        return "srl" + imm_0
-      elif imm == '1':
-        return "srl" + imm_1
+        return "srl" + imm_0 if imm == '0' else "srl" + imm_1
 
   # Memory Functions
   elif op == '11':
@@ -66,7 +63,7 @@ def get_info():
   return input('What is the instruction? ')
 
 if __name__ == '__main__':
-  test = '11000010000000000010101110111000'.replace(" ", "")
+  test = '11000010000000000010101110111000'
   #info = get_info()
   #print(parse_binary(info))
   print(parse_binary(test))
