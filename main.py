@@ -1,6 +1,5 @@
 def parse_binary(num):
   """Parses string binary code and returns string assembly"""
-  asm = ''
   op = num[0:2]
   rd = f"%r{int(num[2:7],2)}"
   op3 = num[7:13]
