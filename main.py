@@ -12,9 +12,7 @@ def parse_binary(num):
   imm_0 = f" {rs1}, {rs2}, {rd}"
   imm_1 = f" {rs1}, {simm13}, {rd}"
 
-  print(f"{op} {rd} {op3} {rs1} {imm} {simm13}")
-  #rd_asm = "{0:0>5}".format(str(int(rd, 2)))
-  rs1_asm = 'hi'
+  #print(f"{op} {rd} {op3} {rs1} {imm} {simm13}")
 
   # Branch functions
   if op == '00':
@@ -71,4 +69,5 @@ def get_info():
 if __name__ == '__main__':
   test = '11000010000000000010101110111000'.replace(" ", "")
   #info = get_info()
+  #print(parse_binary(info))
   print(parse_binary(test))
