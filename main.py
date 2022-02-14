@@ -17,7 +17,6 @@ def parse_binary(num):
   simm13 = int(num[19:], 2)
   disp30 = int(num[2:], 2)
 
-
   # format register output based on immediate
   imm_0 = f" {rs1}, {rs2}, {rd}"
   imm_1 = f" {rs1}, {simm13}, {rd}"
@@ -43,7 +42,7 @@ def parse_binary(num):
 
   # Call functions
   elif op == "01":
-    # will add call later
+    # call
     return f"call {disp30}"
 
   # Arithmetic functions
