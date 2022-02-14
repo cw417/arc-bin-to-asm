@@ -25,7 +25,7 @@ def parse_binary(num):
   #print(f"{op} {rd} {op3} {rs1} {imm} {simm13}")
 
   # Branch functions
-  if op == '00':
+  if op == "00":
     # branch
     if op2 == "010":
       if cond == "0001":
@@ -44,45 +44,43 @@ def parse_binary(num):
       return f"sethi {imm22}, {rd}"
 
   # Call functions
-  elif op == '01':
+  elif op == "01":
     # will add call later
     return f"call {disp30}"
 
   # Arithmetic functions
-  elif op == '10':
+  elif op == "10":
     # addcc
-    if op3 == '010000':
-      return "addcc" + imm_0 if imm == '0' else "addcc" + imm_1
+    if op3 == "010000":
+      return "addcc" + imm_0 if imm == "0" else "addcc" + imm_1
   # subcc
-    if op3 == '010100':
-      return "subcc" + imm_0 if imm == '0' else "subcc" + imm_1
+    if op3 == "010100":
+      return "subcc" + imm_0 if imm == "0" else "subcc" + imm_1
     #andcc
-    if op3 == '010001':
+    if op3 == "010001":
       return "andcc" + imm_0
     #orcc
-    if op3 == '010010':
+    if op3 == "010010":
       return "orcc" + imm_0
     #ornc
-    if op3 == '010110':
+    if op3 == "010110":
       return "orncc" + imm_0
     # srl
-    if op3 == '100110':
-        return "srl" + imm_0 if imm == '0' else "srl" + imm_1
+    if op3 == "100110":
+        return "srl" + imm_0 if imm == "0" else "srl" + imm_1
 
   # Memory Functions
-  elif op == '11':
+  elif op == "11":
     # ld
-    if op3 == '000000':
+    if op3 == "000000":
       return f"ld [{simm13}], {rd}"
     # st
-    elif op3 == '001000':
+    elif op3 == "000100":
       return f"st {rd}, [{simm13}]"
   
 def get_info():
-  return input('What is the instruction? ')
+  return input("What is the instruction? ")
 
-if __name__ == '__main__':
-  test = '000 0110 010 0000000000000000000100'
-  #info = get_info()
-  #print(parse_binary(info))
+if __name__ == "__main__":
+  test = ""
   print(parse_binary(test))
