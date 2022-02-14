@@ -22,8 +22,6 @@ def parse_binary(num):
   imm_0 = f" {rs1}, {rs2}, {rd}"
   imm_1 = f" {rs1}, {simm13}, {rd}"
 
-  #print(f"{op} {rd} {op3} {rs1} {imm} {simm13}")
-
   # Branch functions
   if op == "00":
     # branch
@@ -53,7 +51,7 @@ def parse_binary(num):
     # addcc
     if op3 == "010000":
       return "addcc" + imm_0 if imm == "0" else "addcc" + imm_1
-  # subcc
+    # subcc
     if op3 == "010100":
       return "subcc" + imm_0 if imm == "0" else "subcc" + imm_1
     #andcc
@@ -78,9 +76,11 @@ def parse_binary(num):
     elif op3 == "000100":
       return f"st {rd}, [{simm13}]"
   
-def get_info():
-  return input("What is the instruction? ")
-
 if __name__ == "__main__":
-  test = ""
-  print(parse_binary(test))
+  print("Welcome to the ARC Disassembler.")
+  print("Enter 'q' at any time to quit.")
+  print("Please enter the 32-bit ARC binary instruction to diassesmble.")
+  inp = input("What is the instruction? ")
+  while inp != 'q':
+    print(parse_binary(inp))
+    inp = input("What is the instruction? ")
