@@ -70,10 +70,10 @@ def parse_binary(num):
   elif op == "11":
     # ld
     if op3 == "000000":
-      return f"ld [{simm13}], {rd}"
+      return f"ld {simm13}, {rd}"
     # st
     elif op3 == "000100":
-      return f"st {rd}, [{simm13}]"
+      return f"st {rd}, {simm13}"
   
 def parse_asm(asm):
   """Takes in string ARC assembly instruction, returns string binary equivalent"""
@@ -82,73 +82,76 @@ def parse_asm(asm):
   binary_string = ""
   asm_array = asm.lower().split(" ")
 
-  op = ""
-  cond = ""
-  rd = ""
-  op2 = ""
-  op3 = ""
-  rs1 = ""
-  rs2 = ""
-  imm = ""
-  simm13 = ""
-  disp30 = ""
+  # Branch
+  if asm_array[0] == "be":
+    pass
+  if asm_array[0] == "bcs":
+    pass
+  if asm_array[0] == "bneg":
+    pass
+  if asm_array[0] == "bvs":
+    pass
+  if asm_array[0] == "ba":
+    pass
 
+  # Arithmetic
   if asm_array[0] == "addcc":
-    # addcc
     op = "10"
     op3 = "010000"
     rd = bin(int(asm_array[3].strip("%r,"))).replace("0b", "").zfill(5)
-    if "%" not in asm_array[1] and "%" not in asm_array[2]:
+    rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
+    if "%" not in asm_array[2]:
     # immediate
-      return f"{op} {rd} {op3} {rs1} {imm}"
+      imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
+      return f"{op} {rd} {op3} {rs1} 1 {imm}"
     else:
     # not immediate
-      rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
       rs2 = bin(int(asm_array[2].strip("%r,"))).replace("0b", "").zfill(5)
       return f"{op} {rd} {op3} {rs1} 0 00000000 {rs2}"
   
   if asm_array[0] == "subcc":
-    # subcc 
     op = "10"
     op3 = "010100"
     rd = bin(int(asm_array[3].strip("%r,"))).replace("0b", "").zfill(5)
-    if "%" not in asm_array[1] and "%" not in asm_array[2]:
+    rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
+    if "%" not in asm_array[2]:
     # immediate
-      return f"{op} {rd} {op3} {rs1} {imm}"
+      imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
+      return f"{op} {rd} {op3} {rs1} 1 {imm}"
     else:
     # not immediate
-      rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
       rs2 = bin(int(asm_array[2].strip("%r,"))).replace("0b", "").zfill(5)
       return f"{op} {rd} {op3} {rs1} 0 00000000 {rs2}"
   
   if asm_array[0] == "orcc":
-    # orcc
     op = "10"
     op3 = "010010"
     rd = bin(int(asm_array[3].strip("%r,"))).replace("0b", "").zfill(5)
-    if "%" not in asm_array[1] and "%" not in asm_array[2]:
+    rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
+    if "%" not in asm_array[2]:
     # immediate
-      return f"{op} {rd} {op3} {rs1} {imm}"
+      imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
+      return f"{op} {rd} {op3} {rs1} 1 {imm}"
     else:
     # not immediate
-      rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
       rs2 = bin(int(asm_array[2].strip("%r,"))).replace("0b", "").zfill(5)
       return f"{op} {rd} {op3} {rs1} 0 00000000 {rs2}"
   
   if asm_array[0] == "andcc":
-    # andcc
     op = "10"
     op3 = "010001"
     rd = bin(int(asm_array[3].strip("%r,"))).replace("0b", "").zfill(5)
-    if "%" not in asm_array[1] and "%" not in asm_array[2]:
+    rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
+    if "%" not in asm_array[2]:
     # immediate
-      return f"{op} {rd} {op3} {rs1} {imm}"
+      imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
+      return f"{op} {rd} {op3} {rs1} 1 {imm}"
     else:
     # not immediate
-      rs1 = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
       rs2 = bin(int(asm_array[2].strip("%r,"))).replace("0b", "").zfill(5)
       return f"{op} {rd} {op3} {rs1} 0 00000000 {rs2}"
   
+  # Memory
   if asm_array[0] == "ld":
     op = "11"
     op3 = "000000"
@@ -163,7 +166,7 @@ def parse_asm(asm):
     imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
     return f"{op} {rd} {op3} 00000 1 {imm}"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   print("Welcome to the ARC Disassembler.")
   print("Enter 'q' at any time to quit.")
   print("Please enter the 32-bit ARC binary instruction to diassesmble.")
