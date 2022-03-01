@@ -167,9 +167,11 @@ if __name__ == '__main__':
   print("Welcome to the ARC Disassembler.")
   print("Enter 'q' at any time to quit.")
   print("Please enter the 32-bit ARC binary instruction to diassesmble.")
-  #inp = input("What is the instruction? ")
-  inp = "addcc %r1"
-  print(parse_asm(inp))
-  #while inp != 'q':
-  #  print(parse_binary(inp))
-  #  inp = input("What is the instruction? ")
+  inp = input("What is the instruction? ")
+  while inp != 'q':
+    if len(inp) >= 32:
+      print(parse_binary(inp))
+    elif len(inp) < 32:
+      print(parse_asm(inp))
+    inp = input("What is the instruction? ")
+
