@@ -169,9 +169,9 @@ def parse_asm(asm):
     return f"{op} {rd} {op3} 00000 1 {imm}"
 
 if __name__ == "__main__":
-  print("Welcome to the ARC Disassembler.")
+  print("Welcome to the ARC (Dis)assembler.")
   print("Enter 'q' at any time to quit.")
-  print("Please enter the 32-bit ARC binary instruction to diassesmble.")
+  print("This program converts between ARC binary and assembly instructions.")
   inp = input("What is the instruction? ")
   while inp != 'q':
     if len(inp) >= 32:
