@@ -65,6 +65,8 @@ def parse_binary(num):
     # srl
     if op3 == "100110":
         return "srl" + imm_0 if imm == "0" else "srl" + imm_1
+    if op3 == "111000":
+      return f"jmpl {rs1}+{simm13}, {rd}"
 
   # Memory Functions
   elif op == "11":
