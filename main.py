@@ -158,14 +158,14 @@ def parse_asm(asm):
     op = "11"
     op3 = "000000"
     rd = bin(int(asm_array[2].strip("%r,"))).replace("0b", "").zfill(5)
-    imm = bin(int(asm_array[1].strip(","))).replace("0b", "").zfill(13)
+    imm = bin(int(asm_array[1].strip("[],"))).replace("0b", "").zfill(13)
     return f"{op} {rd} {op3} 00000 1 {imm}"
 
   if asm_array[0] == "st":
     op = "11"
     op3 = "000100"
     rd = bin(int(asm_array[1].strip("%r,"))).replace("0b", "").zfill(5)
-    imm = bin(int(asm_array[2].strip(","))).replace("0b", "").zfill(13)
+    imm = bin(int(asm_array[2].strip("[],"))).replace("0b", "").zfill(13)
     return f"{op} {rd} {op3} 00000 1 {imm}"
 
 if __name__ == "__main__":
