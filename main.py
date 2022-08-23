@@ -1,5 +1,11 @@
 def parse_binary(num):
-  """Parses string binary code and returns string assembly"""
+  """
+  Parses binary or assembly code for ARC. Returns string assembly.
+  
+  @param {String} num  32-bit binary number, or ARC assembly code.
+  @return {String}     Assembly instruction if given binary, and binary if given assembly.
+
+  """
 
   # strip spaces
   num = num.replace(" ", "")
@@ -178,5 +184,6 @@ if __name__ == "__main__":
       print(parse_binary(inp))
     elif len(inp) < 32:
       print(parse_asm(inp))
-    inp = input("What is the instruction? ")
+    inp = input("\nWhat is the instruction? ")
+  print("Exiting.")
 
